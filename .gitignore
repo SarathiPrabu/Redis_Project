@@ -1,0 +1,16 @@
+# Ignore everything
+*
+# Include these files in subdirectories
+!*/
+# Include .cpp, .md, CMakeLists.txt, and Makefiles
+!*.cpp
+!*.md
+!CMakeLists.txt
+!Makefile
+
+# Ignore *.dSYM folders
+*.dSYM/
+build/
+
+# Exclude the .gitignore file itself
+!.gitignore
