@@ -104,20 +104,23 @@ static int32_t one_request(int connfd){
 }
 
 int main() {
+	printf("Server program starting...\n");
     int fd = socket(AF_INET, SOCK_STREAM, 0);
     if (fd < 0) {
         die("socket()");
     }
 
-    // this is needed for most server applications
+    // This is needed for most server applications
     int val = 1;
     setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val));
-
+	const int PORT = 20000;
     // bind
     struct sockaddr_in addr = {};
     addr.sin_family = AF_INET;
-    addr.sin_port = ntohs(20000);
-    addr.sin_addr.s_addr = ntohl(0);    // wildcard address 0.0.0.0
+    addr.sin_port = ntohs(PORT);
+    // We can use any one below to allow request from any IP
+	// addr.sin_addr.s_addr = ntohl(0);    // wildcard address 0.0.0.0
+    addr.sin_addr.s_addr = INADDR_ANY;
     int rv = bind(fd, (const sockaddr *)&addr, sizeof(addr));
     if (rv) {
         die("bind()");
@@ -128,7 +131,7 @@ int main() {
     if (rv) {
         die("listen()");
     }
-
+	printf("Started listening on PORT: %d \n", PORT);
     while (true) {
         // accept
         struct sockaddr_in client_addr = {};

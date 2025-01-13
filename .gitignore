@@ -12,5 +12,7 @@
 *.dSYM/
 build/
 
+testrun.cpp
+
 # Exclude the .gitignore file itself
 !.gitignore
