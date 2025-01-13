@@ -104,13 +104,12 @@ static int32_t one_request(int connfd){
 }
 
 int main() {
-	printf("Server program starting...\n");
     int fd = socket(AF_INET, SOCK_STREAM, 0);
     if (fd < 0) {
         die("socket()");
     }
 
-    // This is needed for most server applications
+    // this is needed for most server applications
     int val = 1;
     setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val));
 	const int PORT = 20000;
@@ -131,7 +130,7 @@ int main() {
     if (rv) {
         die("listen()");
     }
-	printf("Started listening on PORT: %d \n", PORT);
+
     while (true) {
         // accept
         struct sockaddr_in client_addr = {};
